@@ -25,4 +25,15 @@ pipeline{
 				}
 			}
     }
+	post {
+		always{
+			echo 'This is awsome. I run always'
+		}
+		success{
+			echo 'This will run when stages are successfully build'		
+		}
+		failure{
+			echo 'This will run when build get failed'
+		}
+	}
 }
