@@ -5,3 +5,20 @@ node {
 	echo "Integration Test"
 	
 }
+//Declerative pipeline
+pipeline{
+	agent any 
+	stages{
+		stage('Build'){
+			steps {
+				echo "This is build stage"
+			}
+		}
+		stage('Test'){
+		echo "This is test stage"
+	}
+	stage('Integration Test'){
+		echo "This is integration testing stage"
+	}
+    }
+}
