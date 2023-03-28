@@ -12,13 +12,17 @@ pipeline{
 		stage('Build'){
 			steps {
 				echo "This is build stage"
+				}
 			}
-		}
 		stage('Test'){
-		echo "This is test stage"
-	}
-	stage('Integration Test'){
-		echo "This is integration testing stage"
-	}
+			steps{
+				echo "This is test stage"
+				}
+			}
+		stage('Integration Test'){
+			steps{
+				echo "This is integration testing stage"
+				}
+			}
     }
 }
