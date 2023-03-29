@@ -1,3 +1,4 @@
+// BUILD_TAG_FOR_THIS_BUILD:-jenkins-jenkins-devops-microservices-pipeline-13
 // SCRIPTED 
 node {
 	echo "Build"
@@ -46,6 +47,29 @@ pipeline{
 				// echo "This is integration testing stage"
 				}
 			}
+			stage('Package'){ //"This will create jar file and this file we will use used and 
+				steps{		//then it will build the image bcz we need to first build the jar
+					sh "mvn package -DskipTests" //file and the we need to used it for building the docker image".
+				}
+			}
+		stage('Build Docker Image'){
+			steps{
+		//		"docker build -t in28min/currency-exchange-devops:$env.BUILD_TAG" so this is a kind of primitive way
+				script{
+					dockerImage = docker.build("developmentoperations/currency-exchange-devops:${env.BUILD_TAG}")
+			}
+			}
+		}
+		stage('Push Docker Image'){
+			steps{
+				script{
+					docker.withRegistry('' ,'dockerhub'){
+					dockerImage.push();
+					dockerImage.push('latest')
+					}
+				}
+			}
+		}
     }
 	post {
 		always{
